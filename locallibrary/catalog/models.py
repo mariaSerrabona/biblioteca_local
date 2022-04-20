@@ -108,3 +108,12 @@ class Author(models.Model):
         String para representar el Objeto Modelo
         """
         return '%s, %s' % (self.last_name, self.first_name)
+
+
+#ahora tenemos que crear la clase lenguaje que caracteriza a un libro
+
+class Lenguage (models.Model):
+
+    #atributos que definen a un lenguaje: el nombre del idioma
+    #lo dotamos como un CharField puesto que se introducirán caracteres alfanuméticos
+    name=models.CharField(max_length=150, help_text='Introduzca el idioma en el que está escrito el libro (Castellano, Inglés, Portugués...)')
