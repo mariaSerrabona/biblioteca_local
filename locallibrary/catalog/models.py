@@ -3,10 +3,10 @@ from django.urls import reverse #Used to generate URLs by reversing the URL patt
 
 
 # Create your models here.
+
+#primera clase: Genre, clasificación de libros por el género literario
 class Genre(models.Model):
-    """
-    Modelo que representa un género literario (p. ej. ciencia ficción, poesía, etc.).
-    """
+
     name = models.CharField(max_length=200, help_text="Ingrese el nombre del género (p. ej. Ciencia Ficción, Poesía Francesa etc.)")
 
     def __str__(self):
@@ -16,10 +16,9 @@ class Genre(models.Model):
         return self.name
 
 
+
+#segunda clase:libro (en general), con todos los atributos que caracterizan a un libro
 class Book(models.Model):
-    """
-    Modelo que representa un libro (pero no un Ejemplar específico).
-    """
 
     title = models.CharField(max_length=200)
 
