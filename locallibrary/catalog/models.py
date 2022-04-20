@@ -55,10 +55,13 @@ class BookInstance(models.Model):
 
 
     #se definen las características
+    #UUIDField e establece ID como el campo ppal de representación de un libro
+        # solo existe un único valor para cada ubno de los libros
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="ID único para este libro particular en toda la biblioteca")
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
     imprint = models.CharField(max_length=200)
-    due_back = models.DateField(null=True, blank=True)
+    due_back = models.DateField(null=True, blank=True)      #fecha en la que se prevee que vuelva a estar disponible
 
 
     #estado de libro
@@ -80,3 +83,28 @@ class BookInstance(models.Model):
         String para representar el Objeto del Modelo
         """
         return '%s (%s)' % (self.id,self.book.title)
+
+
+
+
+#cuarta clase: autor
+class Author(models.Model):
+
+    #se definen los atributos que caracterizan a un autor
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    date_of_birth = models.DateField(null=True, blank=True)
+    date_of_death = models.DateField('Died', null=True, blank=True)
+
+    def get_absolute_url(self):
+        """
+        Retorna la url para acceder a una instancia particular de un autor.
+        """
+        return reverse('author-detail', args=[str(self.id)])
+
+
+    def __str__(self):
+        """
+        String para representar el Objeto Modelo
+        """
+        return '%s, %s' % (self.last_name, self.first_name)
