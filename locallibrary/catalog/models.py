@@ -7,11 +7,12 @@ class MyModelName(models.Model):
     Una clase típica definiendo un modelo, derivado desde la clase Model.
     """
 
-    # Campos
+    # Cadena de caracteres, tiene etiqueta de texto de ayuda (help_txt)
     my_field_name = models.CharField(max_length=20, help_text="Enter field documentation")
     ...
 
-    # Metadata
+    # Metadata, controla el orden pro defecrto de los registrosque se devuelve cuando se consulta el tipo de modelo.
+    #los libros irán ordenados alfabéticamente
     class Meta:
         ordering = ["-my_field_name"]
 
@@ -27,3 +28,12 @@ class MyModelName(models.Model):
         Cadena para representar el objeto MyModelName (en el sitio de Admin, etc.)
         """
         return self.field_name
+
+
+
+
+# Creación de un nuevo registro usando el constructor del modelo.
+a_record = MyModelName(my_field_name="Instancia #1")
+
+# Guardar el objeto en la base de datos.
+a_record.save()
