@@ -117,3 +117,8 @@ class Lenguage (models.Model):
     #atributos que definen a un lenguaje: el nombre del idioma
     #lo dotamos como un CharField puesto que se introducirán caracteres alfanuméticos
     name=models.CharField(max_length=150, help_text='Introduzca el idioma en el que está escrito el libro (Castellano, Inglés, Portugués...)')
+
+    #ahora falta llamar al método que nos devuelva el idioma:
+
+    def __str__(self):
+        return self.name
