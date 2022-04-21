@@ -14,7 +14,8 @@ def index(request):
     num_instances_available=BookInstance.objects.filter(status__exact='a').count()
     num_authors=Author.objects.count()  # El 'all()' esta implícito por defecto.
 
-    # Renderiza la plantilla HTML index.html con los datos en la variable contexto
+    #se conecta con la plantilla html que hemos creado en templates
+
     return render(
         request,
         'index.html',
