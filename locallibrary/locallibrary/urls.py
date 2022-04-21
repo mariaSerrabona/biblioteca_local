@@ -24,9 +24,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalog/', include('catalog.urls')),
-    path('', RedirectView.as_view(url='/admin/', permanent=True)),
+    path('', RedirectView.as_view(url='/catalog/', permanent=True)),
 ]
 
 #otra forma de añadir una urls
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+urlpatterns += [url(r'^catalog/', include('catalog.urls')),]

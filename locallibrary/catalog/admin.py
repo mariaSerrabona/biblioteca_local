@@ -4,14 +4,6 @@ from django.contrib import admin
 
 from .models import Author, Genre, Book, BookInstance, Lenguage
 
-"""Minimal registration of Models.
-admin.site.register(Book)
-admin.site.register(Author)
-admin.site.register(BookInstance)
-admin.site.register(Genre)
-admin.site.register(Language)
-"""
-
 admin.site.register(Genre)
 admin.site.register(Lenguage)
 
@@ -26,10 +18,12 @@ class AuthorAdmin(admin.ModelAdmin):
 
     list_display = ('last_name',
                     'first_name', 'date_of_birth', 'date_of_death')
+
+    #elemnetos que se van a desplegar en la web
     fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
     inlines = [BooksInline]
 
-
+#TabularInline diseño horizontal
 class BooksInstanceInline(admin.TabularInline):
     """Defines format of inline book instance insertion (used in BookAdmin)"""
     model = BookInstance
