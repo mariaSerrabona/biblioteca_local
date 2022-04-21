@@ -30,4 +30,3 @@ urlpatterns = [
 #otra forma de añadir una urls
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-urlpatterns += [url(r'^catalog/', include('catalog.urls')),]
