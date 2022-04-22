@@ -1,6 +1,10 @@
 from django.db import models
 from django.urls import reverse #Used to generate URLs by reversing the URL patterns
 import uuid
+from django.contrib.auth.models import User
+from datetime import date
+
+
 
 # Create your models here.
 
@@ -88,6 +92,17 @@ class BookInstance(models.Model):
         String para representar el Objeto del Modelo
         """
         return '%s (%s)' % (self.id,self.book.title)
+
+
+    borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    #para ver si el usuario se ha atrasado en la devolución del libro
+    @property
+    def is_overdue(self):
+        if self.due_back and date.today() > self.due_back:
+            return True
+        return False
+
 
 
 
