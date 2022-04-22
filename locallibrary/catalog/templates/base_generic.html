@@ -23,7 +23,10 @@
         {% block sidebar %}
         <ul class="sidebar-nav">
             <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="">All books</a></li>
+
+            <!-- ponemos este enlace para obetener la información de los libros desde todas las páginas
+            importante, siempre que s ehace una modificación en los templates, actualizar la base genérica-->
+            <li><a href="{% url 'books' %}">All books</a></li>
             <li><a href="">All authors</a></li>
         </ul>
         {% endblock %}
