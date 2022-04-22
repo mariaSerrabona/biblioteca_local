@@ -1,0 +1,31 @@
+<!--- en este html lo que se va a hacer es una plantilla por defecto para un
+modelo llamado book en una app específica llamada catalog-->
+<!-- como simpre, primero heredaremos de la plantilla genérica creada al principio-->
+
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Book List</h1>
+
+    <!-- se emplea una condición en if  que establece si la lista de los libros ha sido definida o no
+    si está vacía, será la cláusula else la que se ejecute-->
+    {% if book_list %}
+    <ul>
+
+        <!-- además, se emplea un bucle for para iterar a través de la lista de los libros-->
+        {% for book in book_list %}
+        <li>
+
+            <!-- en cada iteración que se relaiza, de cada libro se muestra el título y autor-->
+
+            <!-- book.get_absolute_url() para obtener una ULR importante, se pueden invocara a métodos siempre y cuando no tengan atributos-->
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
+        </li>
+        {% endfor %}
+
+    </ul>
+    {% else %}
+        <p>There are no books in the library.</p>
+    {% endif %}
+{% endblock %}
