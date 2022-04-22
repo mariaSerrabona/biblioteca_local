@@ -26,6 +26,8 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
+
+    #paginación para que el servidor no trade tanto en cargar los libros
     paginate_by = 10
 
 
