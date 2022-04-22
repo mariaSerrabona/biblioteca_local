@@ -16,8 +16,8 @@ def index(request):
     num_authors=Author.objects.count()  # El 'all()' esta implícito por defecto.
 
     # queremos saber el número de visitas que ah recibido muestra página web
-    num_visits= request.session['num_visits']
-    num_visits+=1
+    num_visits=request.session.get('num_visits', 1)
+    request.session['njum_visits']=num_visits+1
 
     context = {
         'num_books':num_books,

@@ -19,7 +19,7 @@
     <li><strong>Copias disponibles:</strong> {{ num_instances_available }}</li>
     <li><strong>Autores:</strong> {{ num_authors }}</li>
     </ul>
-    <p>Has visitado esta página {{ num_visits }}{% if num_visits == 1 %} time{% else %} veces{% endif %}.</p>
+    <p>Has visitado esta página {{ num_visits }} vez{{ num_visits|pluralize }}.</p>
 
 
 {% endblock %}
