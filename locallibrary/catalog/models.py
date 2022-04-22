@@ -114,6 +114,10 @@ class Author(models.Model):
         """
         return '%s, %s' % (self.last_name, self.first_name)
 
+    #ordenar los autores empleando la clase meta
+    class Meta:
+        ordering = ['last_name']
+
 
 #ahora tenemos que crear la clase lenguaje que caracteriza a un libro
 
