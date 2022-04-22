@@ -31,6 +31,7 @@ class Migration(migrations.Migration):
                 ('summary', models.TextField(help_text='Ingrese una breve descripción del libro', max_length=1000)),
                 ('isbn', models.CharField(help_text='13 Caracteres <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>', max_length=13, verbose_name='ISBN')),
                 ('author', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='catalog.author')),
+                ('language', models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(

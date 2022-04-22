@@ -20,6 +20,18 @@ class Genre(models.Model):
         return self.name
 
 
+class Language (models.Model):
+
+    #atributos que definen a un lenguaje: el nombre del idioma
+    #lo dotamos como un CharField puesto que se introducirán caracteres alfanuméticos
+    name=models.CharField(max_length=150, help_text='Introduzca el idioma en el que está escrito el libro (Castellano, Inglés, Portugués...)')
+
+    #ahora falta llamar al método que nos devuelva el idioma:
+
+    def __str__(self):
+        return self.name
+
+
 
 #segunda clase:libro (en general), con todos los atributos que caracterizan a un libro
 class Book(models.Model):
@@ -37,6 +49,9 @@ class Book(models.Model):
     genre = models.ManyToManyField(Genre, help_text="Seleccione un genero para este libro")
     # ManyToManyField, porque un género puede contener muchos libros y un libro puede cubrir varios géneros.
     # La clase Genre ya ha sido definida, entonces podemos especificar el objeto arriba.
+
+    language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+
 
     def __str__(self):
         """
@@ -71,7 +86,6 @@ class BookInstance(models.Model):
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)      #fecha en la que se prevee que vuelva a estar disponible
-
 
     #estado de libro
     LOAN_STATUS = (
@@ -136,15 +150,3 @@ class Author(models.Model):
         ordering = ['last_name']
 
 
-#ahora tenemos que crear la clase lenguaje que caracteriza a un libro
-
-class Lenguage (models.Model):
-
-    #atributos que definen a un lenguaje: el nombre del idioma
-    #lo dotamos como un CharField puesto que se introducirán caracteres alfanuméticos
-    name=models.CharField(max_length=150, help_text='Introduzca el idioma en el que está escrito el libro (Castellano, Inglés, Portugués...)')
-
-    #ahora falta llamar al método que nos devuelva el idioma:
-
-    def __str__(self):
-        return self.name
