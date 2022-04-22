@@ -15,6 +15,18 @@ def index(request):
     num_instances_available=BookInstance.objects.filter(status__exact='a').count()
     num_authors=Author.objects.count()  # El 'all()' esta implícito por defecto.
 
+    # queremos saber el número de visitas que ah recibido muestra página web
+    num_visits= request.session['num_visits']
+    num_visits+=1
+
+    context = {
+        'num_books':num_books,
+        'num_instances':num_instances,
+        'num_instances_available':num_instances_available,
+        'num_authors':num_authors,
+        'num_visits':num_visits,
+    }
+
     #se conecta con la plantilla html que hemos creado en templates
 
     return render(
