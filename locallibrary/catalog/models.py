@@ -8,7 +8,19 @@ from datetime import date
 
 # Create your models here.
 
-#primera clase: Genre, clasificación de libros por el género literario
+class Language (models.Model):
+
+    #atributos que definen a un lenguaje: el nombre del idioma
+    #lo dotamos como un CharField puesto que se introducirán caracteres alfanuméticos
+    name=models.CharField(max_length=150, help_text='Introduzca el idioma en el que está escrito el libro (Castellano, Inglés, Portugués...)')
+
+    #ahora falta llamar al método que nos devuelva el idioma:
+
+    def __str__(self):
+        return self.name
+
+
+#segunda clase: Genre, clasificación de libros por el género literario
 class Genre(models.Model):
 
     name = models.CharField(max_length=200, help_text="Ingrese el nombre del género (p. ej. Ciencia Ficción, Poesía Francesa etc.)")
@@ -32,6 +44,9 @@ class Book(models.Model):
     summary = models.TextField(max_length=1000, help_text="Ingrese una breve descripción del libro")
 
     isbn = models.CharField('ISBN',max_length=13, help_text='13 Caracteres <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
+
+    language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+
 
     genre = models.ManyToManyField(Genre, help_text="Seleccione un genero para este libro")
     # ManyToManyField, porque un género puede contener muchos libros y un libro puede cubrir varios géneros.
@@ -133,19 +148,5 @@ class Author(models.Model):
     class Meta:
         ordering = ['last_name']
 
-
-
-#ahora tenemos que crear la clase lenguaje que caracteriza a un libro
-
-class Language (models.Model):
-
-    #atributos que definen a un lenguaje: el nombre del idioma
-    #lo dotamos como un CharField puesto que se introducirán caracteres alfanuméticos
-    name=models.CharField(max_length=150, help_text='Introduzca el idioma en el que está escrito el libro (Castellano, Inglés, Portugués...)')
-
-    #ahora falta llamar al método que nos devuelva el idioma:
-
-    def __str__(self):
-        return self.name
 
 
