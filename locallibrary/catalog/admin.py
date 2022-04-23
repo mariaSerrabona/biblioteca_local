@@ -13,6 +13,7 @@ class BooksInline(admin.TabularInline):
     """Defines format of inline book insertion (used in AuthorAdmin)"""
     model = Book
 
+
 #administración de todos los autores con todos sus atributos
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
