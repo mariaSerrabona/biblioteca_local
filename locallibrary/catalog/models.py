@@ -89,6 +89,17 @@ class BookInstance(models.Model):
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)      #fecha en la que se prevee que vuelva a estar disponible
 
+    #añadimos el usuario que ha tomado prestado el llibro
+    borrower=models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    #aviso para saber si esta atrasado en la fecha de entrega
+    @property
+    def is_overdue(self):
+        if self.due_back and datetime.date.today() > self.due_back:
+            return True
+        return False
+
+
     #estado de libro
     LOAN_STATUS = (
         ('m', 'Maintenance'),
@@ -110,17 +121,6 @@ class BookInstance(models.Model):
         String para representar el Objeto del Modelo
         """
         return '%s (%s)' % (self.id,self.book.title)
-
-
-    borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-
-    #para ver si el usuario se ha atrasado en la devolución del libro
-    @property
-    def is_overdue(self):
-        if self.due_back and date.today() > self.due_back:
-            return True
-        return False
-
 
 
 
