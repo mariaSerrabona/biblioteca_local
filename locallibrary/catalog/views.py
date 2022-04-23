@@ -1,16 +1,23 @@
+import datetime
 from django.shortcuts import render
-from .models import Book, Author, BookInstance, Genre
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse #Used to generate URLs by reversing the URL patterns
-import datetime
-from .forms import RenewBookForm
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import permission_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from .models import Author
+from .forms import RenewBookForm
+from .models import Book, Author, BookInstance
+from catalog.forms import RenewBookForm
+from django.contrib.auth.decorators import login_required, permission_required
+
+
+#controles de acceso a zonas de la pagina web
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
+
 
 
 
@@ -88,6 +95,19 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
 
 
 
+#con esta clase, tenemos una vista general de todos los libros prestados a todos los usuarios
+class LoanedBooksAllListView(PermissionRequiredMixin, generic.ListView):
+    """Generic class-based view listing all books on loan. Only visible to users with can_mark_returned permission."""
+    model = BookInstance
+    permission_required = 'catalog.can_mark_returned'
+    template_name = 'catalog/bookinstance_list_borrowed_all.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(status__exact='o').order_by('due_back')
+
+
+@login_required
 @permission_required('catalog.can_mark_returned')
 def renew_book_librarian(request, pk):
     book_inst=get_object_or_404(BookInstance, pk = pk)
@@ -120,13 +140,23 @@ def renew_book_librarian(request, pk):
 #modificar objetos del tipo autor
 class AuthorCreate(CreateView):
     model = Author
-    fields = '__all__'
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
     initial={'date_of_death':'05/01/2018',}
+    #marcamos los permisos necesarios para añadir un autor
+    permission_required = 'catalog.can_mark_returned'
+
 
 class AuthorUpdate(UpdateView):
     model = Author
     fields = ['first_name','last_name','date_of_birth','date_of_death']
 
+    #marcamos los permisos necesarios para añadir un autor
+    permission_required = 'catalog.can_mark_returned'
+
+
 class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('authors')
+
+    #marcamos los permisos necesarios para añadir un autor
+    permission_required = 'catalog.can_mark_returned'
