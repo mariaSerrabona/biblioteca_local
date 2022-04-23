@@ -145,14 +145,12 @@ class AuthorCreate(CreateView):
     #marcamos los permisos necesarios para añadir un autor
     permission_required = 'catalog.can_mark_returned'
 
-
 class AuthorUpdate(UpdateView):
     model = Author
     fields = ['first_name','last_name','date_of_birth','date_of_death']
 
     #marcamos los permisos necesarios para añadir un autor
     permission_required = 'catalog.can_mark_returned'
-
 
 class AuthorDelete(DeleteView):
     model = Author
