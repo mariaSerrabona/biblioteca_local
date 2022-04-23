@@ -2,7 +2,11 @@ from django.db import models
 from django.urls import reverse #Used to generate URLs by reversing the URL patterns
 import uuid
 from django.contrib.auth.models import User
-from datetime import date
+import datetime
+from django.forms import ModelForm
+from .models import BookInstance
+from django.core.exceptions import ValidationError
+
 
 
 
@@ -147,6 +151,28 @@ class Author(models.Model):
     #ordenar los autores empleando la clase meta
     class Meta:
         ordering = ['last_name']
+
+
+
+class RenewBookModelForm(ModelForm):
+    def clean_due_back(self):
+        data = self.cleaned_data['due_back']
+
+    #Comprobar que la fecha no es anterior al dia de hoy
+        if data < datetime.date.today():
+            raise ValidationError(_('Invalid date - renewal in past'))
+
+    #Comporbar que la fecha no supera las cuatro semanas a partir de hoy.
+        if data > datetime.date.today() + datetime.timedelta(weeks=4):
+            raise ValidationError(_('Invalid date - renewal more than 4 weeks ahead'))
+
+    # Devolver la fecha.
+        return data
+    class Meta:
+        model = BookInstance
+        fields = ['due_back',]
+        help_texts = { 'due_back': _('Introduzca una fecha de hoy a 4 semanas (por defecto se derán 3 semanas).'),}
+
 
 
 
