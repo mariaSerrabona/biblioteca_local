@@ -137,7 +137,7 @@ class Author(models.Model):
 
 #ahora tenemos que crear la clase lenguaje que caracteriza a un libro
 
-class Lenguage (models.Model):
+class Language (models.Model):
 
     #atributos que definen a un lenguaje: el nombre del idioma
     #lo dotamos como un CharField puesto que se introducirán caracteres alfanuméticos
