@@ -4,11 +4,11 @@
 
 <h1>Delete Author</h1>
 
-<p>Are you sure you want to delete the author: {{ author }}?</p>
+<p>¿Estás seguro de que quieres eliminar el autor?: {{ author }}?</p>
 
 <form action="" method="POST">
     {% csrf_token %}
-    <input type="submit" action="" value="Yes, delete." />
+    <input type="submit" action="" value="Sí, eliminar." />
 </form>
 
 {% endblock %}

@@ -1,6 +1,6 @@
 #patrones de la app a mediada que la vamso creado
 
-from django.urls import path, include
+from django.urls import path
 
 from . import views
 

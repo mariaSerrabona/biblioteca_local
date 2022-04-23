@@ -1,6 +1,8 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<body style="background-color:lightpink">
+<center>
 
 {% if form.errors %}
 <p>Parece que algo ha ido mal, tu contraseña y/o usuario no coinciden.</p>
@@ -35,4 +37,7 @@
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">¿Has olvidado la contraseña?</a></p>
 
+
+</center>
+</body>
 {% endblock %}

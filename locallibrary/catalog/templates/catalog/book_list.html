@@ -6,6 +6,9 @@ modelo llamado book en una app específica llamada catalog-->
 {% extends "base_generic.html" %}
 
 {% block content %}
+<body style="background-color:lavender">
+
+
     <h1>Book List</h1>
 
     <!-- se emplea una condición en if  que establece si la lista de los libros ha sido definida o no
@@ -28,4 +31,5 @@ modelo llamado book en una app específica llamada catalog-->
     {% else %}
         <p>There are no books in the library.</p>
     {% endif %}
+</body>
 {% endblock %}

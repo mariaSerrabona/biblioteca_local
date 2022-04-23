@@ -3,7 +3,11 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>Borrowed books</h1>
+<body style="background-color:lavender">
+    <center>
+
+
+    <h1>Mis Libros</h1>
 
     {% if bookinstance_list %}
     <ul>
@@ -16,6 +20,8 @@
     </ul>
 
     {% else %}
-        <p>There are no books borrowed.</p>
+        <p>Todavía no has cogido ningún libro.</p>
     {% endif %}
+</center>
+</body>
 {% endblock %}

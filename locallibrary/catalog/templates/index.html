@@ -2,13 +2,16 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<body style="background-color:lightcyan">
+<center>
 <!-- titulo de la página-->
-<h1>Local Library Home</h1>
+<h1>Inicio de la Biblioteca Local</h1>
 
     <p>Bienvenido a <em>LocalLibrary</em>, aquí podrás encontrar un breve resumen del estado de los libros.</p>
 
-    <!-- {% load static %}
-    <img src="{% static 'catalog/images/Unknown.jpeg' %}" style="width:555px;height:540px;"/> -->
+    {% load static %}
+    <img src="{% static "images/biblioteca.jpeg" %}" alt="My image" width="500px" />
+</center>
 <!-- variables de la plantilla-->
 <h2>Resumen de la Biblioteca</h2>
 
@@ -20,10 +23,10 @@
     <li><strong>Autores:</strong> {{ num_authors }}</li>
     </ul>
     <p>Has visitado esta página {{ num_visits }} vez{{ num_visits|pluralize }}.</p>
-
-
+</body>
 {% endblock %}
 
 <!-- referencias a archivos estáticos de css
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+
