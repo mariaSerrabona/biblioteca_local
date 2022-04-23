@@ -4,7 +4,6 @@ import uuid
 from django.contrib.auth.models import User
 import datetime
 from django.forms import ModelForm
-from .models import BookInstance
 from django.core.exceptions import ValidationError
 
 
@@ -160,18 +159,18 @@ class RenewBookModelForm(ModelForm):
 
     #Comprobar que la fecha no es anterior al dia de hoy
         if data < datetime.date.today():
-            raise ValidationError(_('Invalid date - renewal in past'))
+            raise ValidationError(('Invalid date - renewal in past'))
 
     #Comporbar que la fecha no supera las cuatro semanas a partir de hoy.
         if data > datetime.date.today() + datetime.timedelta(weeks=4):
-            raise ValidationError(_('Invalid date - renewal more than 4 weeks ahead'))
+            raise ValidationError(('Invalid date - renewal more than 4 weeks ahead'))
 
     # Devolver la fecha.
         return data
     class Meta:
         model = BookInstance
         fields = ['due_back',]
-        help_texts = { 'due_back': _('Introduzca una fecha de hoy a 4 semanas (por defecto se derán 3 semanas).'),}
+        help_texts = { 'due_back': ('Introduzca una fecha de hoy a 4 semanas (por defecto se derán 3 semanas).'),}
 
 
 
