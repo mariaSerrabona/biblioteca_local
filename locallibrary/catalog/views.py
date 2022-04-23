@@ -19,7 +19,7 @@ def index(request):
 
     # queremos saber el número de visitas que ah recibido muestra página web
     num_visits=request.session.get('num_visits', 1)
-    request.session['njum_visits']=num_visits+1
+    request.session['num_visits']=num_visits+1
 
     context = {
         'num_books':num_books,
