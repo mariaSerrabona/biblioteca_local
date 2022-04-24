@@ -6,6 +6,8 @@ import datetime
 from django.utils import timezone
 from catalog.forms import RenewBookForm
 
+
+#del mismo modo, hay que validar los formularios de nuestra página web
 class RenewBookFormTest(TestCase):
 
     def test_renew_form_date_field_label(self):
