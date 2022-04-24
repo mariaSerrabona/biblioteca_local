@@ -22,6 +22,25 @@ class AuthorModelTest(TestCase):
         #se emplea esta estructura para que el error salte exactamente donde está, haciendo más fácil el debugging
         self.assertEquals(field_label,'first name')
 
+
+    def test_last_name_label(self):
+        author=Author.objects.get(id=1)
+        #no podemos acceder directamente a los datos del autor, primero debemos acceder a su clase meta y usuarla para obtener info adicional
+        field_label = author._meta.get_field('last_name').verbose_name
+        #se emplea esta estructura para que el error salte exactamente donde está, haciendo más fácil el debugging
+        self.assertEquals(field_label,'last name')
+
+    def test_first_name_max_length(self):
+        author=Author.objects.get(id=1)
+        max_length = author._meta.get_field('first_name').max_length
+        self.assertEquals(max_length,100)
+
+    #completando las pruebas con otros campos de los autores
+    def test_last_name_max_length(self):
+        author=Author.objects.get(id=1)
+        max_length = author._meta.get_field('last_name').max_length
+        self.assertEquals(max_length,100)
+
     #siguiendo con los test, habrá que comprobar la fecha de nacimiento
     def test_date_of_birth_label(self):
         author = Author.objects.get(id=1)
@@ -32,11 +51,6 @@ class AuthorModelTest(TestCase):
         author=Author.objects.get(id=1)
         field_label = author._meta.get_field('date_of_death').verbose_name
         self.assertEquals(field_label,'died')
-
-    def test_first_name_max_length(self):
-        author=Author.objects.get(id=1)
-        max_length = author._meta.get_field('first_name').max_length
-        self.assertEquals(max_length,100)
 
     def test_object_name_is_last_name_comma_first_name(self):
         author=Author.objects.get(id=1)
