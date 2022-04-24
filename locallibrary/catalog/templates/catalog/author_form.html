@@ -1,6 +1,8 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<body style="background-color:lavender">
+    <center>
 
 <form action="" method="post">
     {% csrf_token %}
@@ -10,4 +12,6 @@
     <input type="submit" value="Submit" />
 
 </form>
+    </center>
+</body>
 {% endblock %}

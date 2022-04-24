@@ -141,7 +141,7 @@ def renew_book_librarian(request, pk):
 class AuthorCreate(CreateView):
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
-    initial={'date_of_death':'05/01/2018',}
+    initial={'date_of_death':'24/04/2022',}
     #marcamos los permisos necesarios para añadir un autor
     permission_required = 'catalog.can_mark_returned'
 
