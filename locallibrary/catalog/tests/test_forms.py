@@ -9,7 +9,7 @@ from catalog.forms import RenewBookForm
 
 #del mismo modo, hay que validar los formularios de nuestra página web
 class RenewBookFormTest(TestCase):
-
+#se valida cada uno de los campos y sus posibilidades, tamaño, si una fecha está en el pasado...
     def test_renew_form_date_field_label(self):
         form = RenewBookForm()
         self.assertTrue(form.fields['renewal_date'].label == None or form.fields['renewal_date'].label == 'renewal date')
@@ -24,6 +24,7 @@ class RenewBookFormTest(TestCase):
         form = RenewBookForm(data=form_data)
         self.assertFalse(form.is_valid())
 
+#fecha muy lejana en el futuro
     def test_renew_form_date_too_far_in_future(self):
         date = datetime.date.today() + datetime.timedelta(weeks=4) + datetime.timedelta(days=1)
         form_data = {'renewal_date': date}
