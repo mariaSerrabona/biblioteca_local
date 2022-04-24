@@ -41,6 +41,7 @@
                 {% if perms.catalog.can_mark_returned %}
                     <li><a href="{% url 'all-borrowed' %}">Todos los libros prestados</a></li>
                     <li><a href="{% url 'author-create' %}">Añadir un Autor</a></li>
+                    <li><a href="{% url 'book-create' %}">Añadir un Libro</a></li>
                 {% endif %}
                 </ul>
             {% endif %}
